@@ -48,9 +48,13 @@ function genHTML(thing, i) {
 	`
 	<div class="row">
 		<div class="col-sm-4" ></div>
-		<div id="options" class="col-sm-4 well">
-			${thing}
-			<button id="${i}" class="remove btn btn-danger">X</button>
+		<div class="col-sm-4 row">
+			<div id="options" class="alert alert-info">
+				${thing}
+				<p class="pull-right">
+					<a id="${i}" class="remove btn btn-danger">X</a>
+				</p>
+			</div>
 		</div>
 		<div class="col-sm-4" ></div>
 	</div>
@@ -65,6 +69,7 @@ function getThings() {
 	if (thingStr != null) {
 		things = JSON.parse(thingStr);
 	}
+	console.log(things);
 	return things;
 }
 
