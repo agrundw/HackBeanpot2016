@@ -8,11 +8,12 @@ function add() {
 		input.value = '';
 	}
 
-	show();
+	show(0);
+
+	console.log("add was Clicked!");
+
 
 	return false;
-
-	console.log("I was Clicked!");
 }
 
 function remove() {
@@ -21,17 +22,33 @@ function remove() {
 	things.splice(id,1);
 	sessionStorage.setItem('thing', JSON.stringify(things));
 
-	show();
+	show(0);
 
 	return false;
 }
 
-function show() {
+function show(pick) {
 	var things = getThings();
 
 	var html = '';
-	for (var i = 0; i < things.length; i++) {
-		html += genHTML(things[i], i);
+
+	if (pick) {
+		var choice = getRandomInt(0,things.length - 1);
+
+		for (var i = 0; i < things.length; i++) {
+			if (i == choice) {
+				html += genHTML(things[i], i, "success");
+			}
+			else {
+				html += genHTML(things[i], i, "danger");
+			}
+		}	
+		console.log("pick was Clicked!");
+	}
+	else {
+		for (var i = 0; i < things.length; i++) {
+			html += genHTML(things[i], i, "info");
+		}
 	}
 
 	document.getElementById('things').innerHTML = html;
@@ -43,20 +60,28 @@ function show() {
 
 }
 
-function genHTML(thing, i) {
+function getRandomInt(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function decide() {
+	show(1);
+}
+
+function genHTML(thing, i, type) {
 	var html =
 	`
 	<div class="row">
-		<div class="col-sm-4" ></div>
-		<div class="col-sm-4 row">
-			<div id="options" class="alert alert-info">
-				${thing}
-				<p class="pull-right">
-					<a id="${i}" class="remove btn btn-danger">X</a>
-				</p>
-			</div>
-		</div>
-		<div class="col-sm-4" ></div>
+	<div class="col-sm-4" ></div>
+	<div class="col-sm-4 row">
+	<div id="options" class="alert alert-${type}">
+	${thing}
+	<p class="pull-right">
+	<a id="${i}" class="remove btn btn-danger">X</a>
+	</p>
+	</div>
+	</div>
+	<div class="col-sm-4" ></div>
 	</div>
 	`;
 
@@ -74,3 +99,4 @@ function getThings() {
 }
 
 document.getElementById('add').addEventListener('click', add);
+document.getElementById('pick').addEventListener('click', decide);
