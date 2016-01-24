@@ -62,9 +62,13 @@ function show(pick) {
 	for(var i = 0; i < btns.length; i++) {
 		btns[i].addEventListener('click', remove	);
 	}
-	document.getElementById('mapBtn').addEventListener('click', getLocation);
+	
 	console.log(window.location);
 	window.location.hash = encURI();
+	var mapbtn = document.getElementById('mapBtn');
+	if (mapbtn){
+		mapBtn.addEventListener('click', getLocation);
+	}
 }
 
 function getRandomInt(min, max) {
