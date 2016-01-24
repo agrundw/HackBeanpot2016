@@ -12,8 +12,11 @@ function add() {
 
 	console.log("add was Clicked!");
 
-
 	return false;
+}
+
+function encURI() {
+	return encodeURI(sessionStorage.getItem('thing'));
 }
 
 function remove() {
@@ -58,6 +61,8 @@ function show(pick) {
 		btns[i].addEventListener('click', remove);
 	}
 
+	console.log(window.location);
+	window.location.hash = encURI();
 }
 
 function getRandomInt(min, max) {
@@ -66,14 +71,15 @@ function getRandomInt(min, max) {
 
 function decide() {
 	show(1);
+	console.log(sessionStorage)
 }
 
 function genHTML(thing, i, type) {
 	var html =
 	`
 	<div class="row">
-	<div class="col-sm-4" ></div>
-	<div class="col-sm-4 row">
+	<div class="col-md-3" ></div>
+	<div class="col-xs-12 col-md-6">
 	<div id="options" class="alert alert-${type}">
 	${thing}
 	<p class="pull-right">
@@ -81,7 +87,7 @@ function genHTML(thing, i, type) {
 	</p>
 	</div>
 	</div>
-	<div class="col-sm-4" ></div>
+	<div class=" col-md-3" ></div>
 	</div>
 	`;
 
@@ -98,5 +104,36 @@ function getThings() {
 	return things;
 }
 
+
+function getUrlData() {
+	var url = window.location.hash;
+	var data = url;
+	console.log(data);
+	data = data.substring(1, data.length);
+	data = decodeURI(data);
+	console.log("data is " + data);
+	var dataArr = [];
+	if (data != null) {
+		dataArr = JSON.parse(data);
+	}
+	sessionStorage.setItem('thing', JSON.stringify(dataArr));
+}
+
+
+function getLink() {
+	console.log(window.location.href);
+	if (sessionStorage.getItem('thing')){
+		var link = window.location.pathname + "#" + encURI();
+		console.log(link);
+		$('#share').attr("data-content", link);
+	}
+}
+
+
 document.getElementById('add').addEventListener('click', add);
 document.getElementById('pick').addEventListener('click', decide);
+getUrlData();
+show(0);
+$(document).ready(function(){
+	$('#share').popover();
+});
