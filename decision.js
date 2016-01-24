@@ -40,7 +40,7 @@ function show(pick) {
 
 		for (var i = 0; i < things.length; i++) {
 			if (i == choice) {
-				html += genHTML(things[i], i, "success");
+				html += genHTMLchoice(things[i], i);
 				call = things[i]; //Dorian added this
 			}
 			else {
@@ -48,7 +48,7 @@ function show(pick) {
 			}
 		}	
 		console.log("pick was Clicked!");
-		getLocation(); //Dorian Added this
+		//getLocation(); //Dorian Added this
 	}
 	else {
 		for (var i = 0; i < things.length; i++) {
@@ -62,7 +62,7 @@ function show(pick) {
 	for(var i = 0; i < btns.length; i++) {
 		btns[i].addEventListener('click', remove	);
 	}
-
+	document.getElementById('mapBtn').addEventListener('click', getLocation);
 	console.log(window.location);
 	window.location.hash = encURI();
 }
@@ -96,6 +96,31 @@ function genHTML(thing, i, type) {
 	return html;
 }
 
+function genHTMLchoice(thing, i) {
+	var html =
+	`
+	<div class="row">
+	<div class="col-md-3" ></div>
+	<div class="col-xs-12 col-md-6">
+	<div id="options" class="alert alert-success">
+	${thing}
+	<p class="pull-right">
+	<a class="btn-group">
+	<a id="mapBtn" class="btn btn-info">
+	<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+	</a>
+	<a id="${i}" class="remove btn btn-danger">X</a>
+	</a>
+	</p>
+	</div>
+	</div>
+	<div class=" col-md-3" ></div>
+	</div>
+	`;
+
+	return html;
+}
+
 function getThings() {
 	var things = [];
 	var thingStr = sessionStorage.getItem('thing');
@@ -105,7 +130,6 @@ function getThings() {
 	console.log(things);
 	return things;
 }
-
 
 function getUrlData() {
 	var url = window.location.hash;
@@ -121,23 +145,7 @@ function getUrlData() {
 	sessionStorage.setItem('thing', JSON.stringify(dataArr));
 }
 
-
-/*function getLink() {
-	console.log(window.location.href);
-	if (sessionStorage.getItem('thing')){
-		var link = window.location.pathname + "#" + encURI();
-		console.log(link);
-		$('#share').attr("data-content", link);
-	}
-}*/
-
-//DC
-
 var call;
-var map;
-var loc;
-var service;
-var infowindow;
 
 function getLocation() {
     if (navigator.geolocation) {
@@ -150,73 +158,19 @@ function getLocation() {
 }
 
 function showPosition(position) {
-	
-	var str = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=Latitude,Longitude&rankby=distance&types=food&keyword=KEYKK&opennow&key=AIzaSyAWtDIXR58eZcyZHn4-ToZaoGT_cnp3eg4";
-
-	//"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=Latitude,Longitude&radius=4023&types=food&keyword=KEYKK&opennow&key=AIzaSyAWtDIXR58eZcyZHn4-ToZaoGT_cnp3eg4"
-
-	//str = str.replace("Latitude", position.coords.latitude);
-	//str = str.replace("Longitude", position.coords.longitude);
-	//str = str.replace("KEYKK", call);
-	//alert(str);
-
-	loc = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-	alert(position.coords.latitude);
-	alert( position.coords.longitude);
-	 map = new google.maps.Map(document.getElementById('map'), {
-    center: loc,
-    zoom: 15
-  	});
-
-	 infowindow = new google.maps.InfoWindow(); 
-	var request = {
-		location: loc,
-		//radius: '4023',
-		types: ['food'],
-		keyword: call,
-		openNow: true,
-		rankBy: google.maps.places.RankBy.DISTANCE
-	};
-
-	service = new google.maps.places.PlacesService(map);
-	service.nearbySearch(request, callback);
-	alert("done");
+	var surl = "https://www.google.com/maps/search/KEYKK/@Lat,Long,13z"
+	surl = surl.replace("KEYKK", call);
+	surl = surl.replace("Long", position.coords.longitude);
+	surl = surl.replace("Lat", position.coords.latitude);
+	window.open(surl);
 }
-
-function callback(results, status) {
-	if (status == google.maps.places.PlacesServiceStatus.OK) {
-		for (var i = 0; i < results.length; i++) {
-			var place = results[i];
-			createMarker(results[i]);
-		}
-	}
-}
-
-function createMarker(place) {
-  var placeLoc = place.geometry.location;
-  var marker = new google.maps.Marker({
-    map: map,
-    position: place.geometry.location
-  });
-
-  google.maps.event.addListener(marker, 'click', function() {
-    infowindow.setContent(place.name);
-    infowindow.open(map, this);
-  });
-}
-
-
-//EDC
-
 
 document.getElementById('add').addEventListener('click', add);
-
 $('#input').keyup(function (e) {
 	if (e.keyCode == 13) {
 		add();
 	}
 });
-
 document.getElementById('pick').addEventListener('click', decide);
 getUrlData();
 show(0);
