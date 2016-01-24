@@ -15,24 +15,97 @@
     margin-bottom: 30px;
   }
   /*  <!-- Dorian Added This -->
-*/  #map {
-        height: 100%;
-      }
+  */  #map {
+    height: 100%;
+  }
+  body {
+    background-color: #222
+  }
+  .jumbotron {
+    background-color: #333;
+  }
+  .jumbotron h1{
+    color: #666;
+  }
+
+  .jumbotron p{
+    color: #666;
+  }
+
+  .form-control{
+    background-color: #333;
+    border-color: #222;
+    color: #999;
+  }
+
+.form-control:focus {
+  border-color: #FF6F00;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.075), 0 0 8px rgba(255, 128, 128, 0.6);
+}
+
+.btn-custom { 
+  color: #750000; 
+  background-color: #FF5500; 
+  border-color: #FF2A00; 
+} 
+ 
+.btn-custom:hover, 
+.btn-custom:focus, 
+.btn-custom:active, 
+.btn-custom.active, 
+.open .dropdown-toggle.btn-custom { 
+  color: #750000; 
+  background-color: #FF8800; 
+  border-color: #FF2A00; 
+} 
+ 
+.btn-custom:active, 
+.btn-custom.active, 
+.open .dropdown-toggle.btn-custom { 
+  background-image: none; 
+} 
+ 
+.btn-custom.disabled, 
+.btn-custom[disabled], 
+fieldset[disabled] .btn-custom, 
+.btn-custom.disabled:hover, 
+.btn-custom[disabled]:hover, 
+fieldset[disabled] .btn-custom:hover, 
+.btn-custom.disabled:focus, 
+.btn-custom[disabled]:focus, 
+fieldset[disabled] .btn-custom:focus, 
+.btn-custom.disabled:active, 
+.btn-custom[disabled]:active, 
+fieldset[disabled] .btn-custom:active, 
+.btn-custom.disabled.active, 
+.btn-custom[disabled].active, 
+fieldset[disabled] .btn-custom.active { 
+  background-color: #FF5500; 
+  border-color: #FF2A00; 
+} 
+ 
+.btn-custom .badge { 
+  color: #FF5500; 
+  background-color: #750000; 
+}
+
+button:focus {outline:0 !important;}
+
   </style>
 </head>
 
-<body>
+<body class="color-swatch gray-dark">
 
   <div class="container-fluid">
     <div class="row jumbotron">
-      <h1>Welcome!</h1>
+      <h1>Making your decisions easier</h1>
     </div>
     
     <div class="row col-sm-12">
       <div class="input-group">
         <input id="input" type="text" class="form-control" placeholder="I want...">
         <span class="input-group-btn">
-          <button id="add" class="btn btn-default" type="button">Add</button>
+          <button id="add" class="btn btn-custom" type="button">Add</button>
         </span>
       </div>
     </div>
@@ -40,14 +113,14 @@
     <div id="things" class="row col-sm-12"></div>
 
     <div id="PickButton" class="row col-sm-12">
-      <button id="pick" class="btn btn-info btn-lg btn-block" type="button">Make a decision for me!</button>
+      <button id="pick" class="btn btn-custom btn-lg btn-block" type="button">Make my decision</button>
     </div>
 
-    <div id="shareButton" class="row col-sm-12">
+<!--     <div id="shareButton" class="row col-sm-12">
       <a id="share" class="btn btn-info btn-lg btn-block" type="button" date-toggle="popover" data-placement="bottom" data-content="" onclick="getLink()">Share!</a>
-    </div>
+    </div> -->
 
-    <div id="map"></div> <!-- Dorian Added This -->
+  <div id="map"></div> <!-- Dorian Added This -->
 
   </div>
 

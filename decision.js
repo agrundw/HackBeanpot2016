@@ -122,14 +122,14 @@ function getUrlData() {
 }
 
 
-function getLink() {
+/*function getLink() {
 	console.log(window.location.href);
 	if (sessionStorage.getItem('thing')){
 		var link = window.location.pathname + "#" + encURI();
 		console.log(link);
 		$('#share').attr("data-content", link);
 	}
-}
+}*/
 
 //DC
 
@@ -210,9 +210,19 @@ function createMarker(place) {
 
 
 document.getElementById('add').addEventListener('click', add);
+
+$('#input').keyup(function (e) {
+	if (e.keyCode == 13) {
+		add();
+	}
+});
+
 document.getElementById('pick').addEventListener('click', decide);
 getUrlData();
 show(0);
 $(document).ready(function(){
 	$('#share').popover();
+});
+$(".btn").mouseup(function(){
+    $(this).blur();
 });
