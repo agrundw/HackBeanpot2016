@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWtDIXR58eZcyZHn4-ToZaoGT_cnp3eg4&libraries=places"></script> <!-- Dorian Added This -->
+
 
   <style type="text/css">
   .alert p .btn {
     display:inline;
   }
-  .input-group{
-    margin-bottom: 30px;
-  }
-  /*  <!-- Dorian Added This -->
+/*  <!-- Dorian Added This -->
 */  #map {
         height: 100%;
       }
+
   </style>
 </head>
 
@@ -29,7 +28,7 @@
     </div>
     
     <div class="row col-sm-12">
-      <div class="input-group">
+      <div class="input-group" style="margin-bottom: 30px">
         <input id="input" type="text" class="form-control" placeholder="I want...">
         <span class="input-group-btn">
           <button id="add" class="btn btn-default" type="button">Add</button>
@@ -42,11 +41,6 @@
     <div id="PickButton" class="row col-sm-12">
       <button id="pick" class="btn btn-info btn-lg btn-block" type="button">Make a decision for me!</button>
     </div>
-
-    <div id="shareButton" class="row col-sm-12">
-      <a id="share" class="btn btn-info btn-lg btn-block" type="button" date-toggle="popover" data-placement="bottom" data-content="" onclick="getLink()">Share!</a>
-    </div>
-
     <div id="map"></div> <!-- Dorian Added This -->
 
   </div>
@@ -54,3 +48,4 @@
 </body>
 <script src="decision.js"></script>
 </html>
+

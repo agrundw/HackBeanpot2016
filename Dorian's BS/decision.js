@@ -1,3 +1,4 @@
+
 function add() {
 	var input = document.getElementById('input');
 
@@ -12,11 +13,8 @@ function add() {
 
 	console.log("add was Clicked!");
 
-	return false;
-}
 
-function encURI() {
-	return encodeURI(sessionStorage.getItem('thing'));
+	return false;
 }
 
 function remove() {
@@ -60,12 +58,15 @@ function show(pick) {
 
 	var btns = document.getElementsByClassName('remove');
 	for(var i = 0; i < btns.length; i++) {
-		btns[i].addEventListener('click', remove	);
+		btns[i].addEventListener('click', remove);
 	}
 
-	console.log(window.location);
-	window.location.hash = encURI();
+
+
 }
+
+
+
 
 function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -73,15 +74,14 @@ function getRandomInt(min, max) {
 
 function decide() {
 	show(1);
-	console.log(sessionStorage)
 }
 
 function genHTML(thing, i, type) {
 	var html =
 	`
 	<div class="row">
-	<div class="col-md-3" ></div>
-	<div class="col-xs-12 col-md-6">
+	<div class="col-sm-4" ></div>
+	<div class="col-sm-4 row">
 	<div id="options" class="alert alert-${type}">
 	${thing}
 	<p class="pull-right">
@@ -89,7 +89,7 @@ function genHTML(thing, i, type) {
 	</p>
 	</div>
 	</div>
-	<div class=" col-md-3" ></div>
+	<div class="col-sm-4" ></div>
 	</div>
 	`;
 
@@ -107,32 +107,14 @@ function getThings() {
 }
 
 
-function getUrlData() {
-	var url = window.location.hash;
-	var data = url;
-	console.log(data);
-	data = data.substring(1, data.length);
-	data = decodeURI(data);
-	console.log("data is " + data);
-	var dataArr = [];
-	if (data != null) {
-		dataArr = JSON.parse(data);
-	}
-	sessionStorage.setItem('thing', JSON.stringify(dataArr));
-}
+
+document.getElementById('add').addEventListener('click', add);
+document.getElementById('pick').addEventListener('click', decide);
 
 
-function getLink() {
-	console.log(window.location.href);
-	if (sessionStorage.getItem('thing')){
-		var link = window.location.pathname + "#" + encURI();
-		console.log(link);
-		$('#share').attr("data-content", link);
-	}
-}
-
-//DC
-
+//
+//Dorian Added everything below this
+//
 var call;
 var map;
 var loc;
@@ -206,13 +188,29 @@ function createMarker(place) {
 }
 
 
-//EDC
 
 
-document.getElementById('add').addEventListener('click', add);
-document.getElementById('pick').addEventListener('click', decide);
-getUrlData();
-show(0);
-$(document).ready(function(){
-	$('#share').popover();
+
+
+/*
+
+$.getJSON(str, function(json) {
+	//alert(jason.results[0].);
+		alert("Hola");
+
+    // Set the variables from the results array
+    var name = json.results[0].name;
+    
+
+        // Set the variables from the results array
+    var address = json.results[0].vicinity;
+    
+
+    alert(name, address);
 });
+
+
+}
+
+
+*/
